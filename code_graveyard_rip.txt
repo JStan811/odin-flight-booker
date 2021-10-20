@@ -1,1 +1,0 @@
-flight.start_datetime.year == params["start_datetime(1i)"].to_i && flight.start_datetime.month == params["start_datetime(2i)"].to_i && flight.start_datetime.day == params["start_datetime(3i)"].to_i
