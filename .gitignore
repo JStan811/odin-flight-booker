@@ -40,4 +40,4 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore code graveyard
-coge_graveyard_rip.txt
+code_graveyard_rip.txt
