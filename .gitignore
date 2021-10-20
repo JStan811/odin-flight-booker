@@ -40,4 +40,4 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore code graveyard
-code_graveyard.txt
+/my_stuff/*
