@@ -1,0 +1,41 @@
+<h1>I wanna flyy awaayy...</h1>
+
+<h2>All flights:</h2>
+<ul>
+  <% @flights.each do |flight| %>
+    <li>
+      Flight ID: <%= flight.id %>
+      | Origin: <%= flight.from_airport.code %>
+      | Destination: <%= flight.to_airport.code %>
+      | Departure: <%= flight.start_datetime.in_time_zone("Central Time (US & Canada)").strftime("%c") %>
+      | Duration: <%= flight.duration %> minutes
+    </li>
+  <% end %>
+</ul>
+
+<h1>Search for flight</h1>
+<%= form_with url: root_path, method: :get do |f| %>
+  Origin: <%= f.collection_select :start_airport_id, Airport.all, :id, :code, {:selected => "SFO"} %>
+  Destination: <%= f.collection_select :finish_airport_id, Airport.all, :id, :code, {:default => "NYC"} %>
+  Number of Passengers: <%= f.select :number_of_passengers, [1, 2, 3, 4]%>
+  Departure Date1: <%= f.collection_select :start_datetime, Flight.all, :start_datetime, :start_datetime_formatted %>
+  Departure Date2: <%= f.date_select :start_datetime %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<% if params.include?(:start_airport_id) %>
+  <h2>Available Flights</h2>
+    <% @flights.each do |flight| %>
+      <p>:start_datetime <%= flight.start_datetime.to_s[0, 10] %></p>
+      <p>params[:start_datetime] <%= params[:start_datetime][0, 10] %></p>
+      <% if flight.start_airport_id == params[:start_airport_id].to_i && flight.finish_airport_id == params[:finish_airport_id].to_i &&  %>
+        <li>
+          Flight ID: <%= flight.id %>
+          | Origin: <%= flight.from_airport.code %>
+          | Destination: <%= flight.to_airport.code %>
+          | Departure: <%= flight.start_datetime.in_time_zone("Central Time (US & Canada)").strftime("%c") %>
+          | Duration: <%= flight.duration %> minutes
+        </li>
+      <% end %>
+    <% end %>
+<% end %>
