@@ -1,17 +1,4 @@
-<h1>I wanna flyy awaayy...</h1>
-
-<h2>All flights:</h2>
-<ul>
-  <% @flights.each do |flight| %>
-    <li>
-      Flight ID: <%= flight.id %>
-      | Origin: <%= flight.from_airport.code %>
-      | Destination: <%= flight.to_airport.code %>
-      | Departure: <%= flight.start_datetime.in_time_zone("Central Time (US & Canada)").strftime("%c") %>
-      | Duration: <%= flight.duration %> minutes
-    </li>
-  <% end %>
-</ul>
+<h4>"The world is not in your books and maps, it's out there." - The Hobbit</h4>
 
 <h1>Search for flight</h1>
 <%= form_with url: root_path, method: :get do |f| %>
@@ -35,4 +22,10 @@
         </li>
       <% end %>
     <% end %>
+    <h2>Available Flights Radio Button</h2>
+      <%= form_with url: root_path, method: :get do |f| %>
+        <%= f.collection_radio_buttons :flight_id, @available_flights, :id, :start_datetime_formatted %>
+        <br>
+        <%= f.submit "Select" %>
+      <% end %>
 <% end %>

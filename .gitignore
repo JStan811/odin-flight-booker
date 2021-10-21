@@ -39,5 +39,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-# Ignore code graveyard
+# Ignore my stuff
 /my_stuff/*
