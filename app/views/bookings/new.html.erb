@@ -1,0 +1,20 @@
+<h1>Booking</h1>
+  <p>
+    Flight ID: <%= @flight.id %> </br>
+    Origin: <%= @flight.from_airport.code %> </br>
+    Destination: <%= @flight.to_airport.code %> </br>
+    Departure: <%= @flight.start_datetime.in_time_zone("Central Time (US & Canada)").strftime("%c") %> </br>
+    Duration: <%= @flight.duration %> minutes
+  </p>
+  <p>Number of passengers: <%= @number_of_passengers %></p>
+  <p>Passenger information:</p>
+  <%= form_with model: @booking do |booking_form| %>
+    <%= booking_form.hidden_field :flight_id, value: @flight.id %>
+    <%= booking_form.fields_for :passengers do |passengers_form| %>
+      <%= passengers_form.label :name, "Name:" %>
+      <%= passengers_form.text_field :name %>
+      <%= passengers_form.label :email, "Email:" %>
+      <%= passengers_form.text_field :email %> </br>
+      <% end %>
+    <%= booking_form.submit "Submit" %>
+  <% end %>

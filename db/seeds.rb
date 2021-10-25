@@ -11,6 +11,10 @@ Airport.delete_all
 ActiveRecord::Base.connection.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='airports';")
 Flight.delete_all
 ActiveRecord::Base.connection.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='flights';")
+Booking.delete_all
+ActiveRecord::Base.connection.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='bookings';")
+Passenger.delete_all
+ActiveRecord::Base.connection.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='passengers';")
 
 Airport.create(code: 'SFO')
 Airport.create(code: 'NYC')

@@ -1,31 +1,21 @@
 <h4>"The world is not in your books and maps, it's out there." - The Hobbit</h4>
 
-<h1>Search for flight</h1>
+<h2>Search for flight</h2>
 <%= form_with url: root_path, method: :get do |f| %>
   Origin: <%= f.collection_select :start_airport_id, Airport.all, :id, :code, {:selected => 1} %>
   Destination: <%= f.collection_select :finish_airport_id, Airport.all, :id, :code, {:selected => 2} %>
   Number of Passengers: <%= f.select :number_of_passengers, [1, 2, 3, 4]%>
+  <% @number_of_passengers = :number_of_passengers %>
   Departure Date: <%= select_tag(:start_datetime, options_for_select(@uniq_flights_sorted)) %>
   <%= f.submit "Search" %>
 <% end %>
 
 <% if params.include?(:start_airport_id) %>
   <h2>Available Flights</h2>
-    <% @flights.each do |flight| %>
-      <% if flight.start_airport_id == params[:start_airport_id].to_i && flight.finish_airport_id == params[:finish_airport_id].to_i && flight.start_datetime.to_s[0, 10] == params[:start_datetime] %>
-        <li>
-          Flight ID: <%= flight.id %>
-          | Origin: <%= flight.from_airport.code %>
-          | Destination: <%= flight.to_airport.code %>
-          | Departure: <%= flight.start_datetime.in_time_zone("Central Time (US & Canada)").strftime("%c") %>
-          | Duration: <%= flight.duration %> minutes
-        </li>
-      <% end %>
-    <% end %>
-    <h2>Available Flights Radio Button</h2>
-      <%= form_with url: root_path, method: :get do |f| %>
-        <%= f.collection_radio_buttons :flight_id, @available_flights, :id, :start_datetime_formatted %>
-        <br>
-        <%= f.submit "Select" %>
-      <% end %>
+  <%= form_with url: new_booking_path, method: :get do |f| %>
+    <%= f.hidden_field :number_of_passengers, value: params[:number_of_passengers] %>
+    <%= f.collection_radio_buttons :flight_id, @available_flights, :id, :start_datetime_formatted %>
+    <br>
+    <%= f.submit "Select" %>
+  <% end %>
 <% end %>

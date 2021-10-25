@@ -1,0 +1,18 @@
+<h2>Congratulations. You've successfully booked your flight.</h2>
+
+<h3>Booking information</h3>
+
+<p>
+  Flight ID: <%= @booking.flight.id %> </br>
+  Origin: <%= @booking.flight.from_airport.code %> </br>
+  Destination: <%= @booking.flight.to_airport.code %> </br>
+  Departure: <%= @booking.flight.start_datetime.in_time_zone("Central Time (US & Canada)").strftime("%c") %> </br>
+  Duration: <%= @booking.flight.duration %> minutes
+</p>
+
+<p>Passengers:</p>
+<ul>
+  <% @booking.passengers.each do |passenger| %>
+    <li>Name: <%= passenger.name %>, Email: <%= passenger.email %></li>
+  <% end %>
+</ul>
