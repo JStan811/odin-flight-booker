@@ -1,0 +1,13 @@
+The Shire thanks you <%= @passenger.name %>.
+
+Your flight information
+
+  Flight ID: <%= @booking.flight.id %>
+  Origin: <%= @booking.flight.from_airport.code %>
+  Destination: <%= @booking.flight.to_airport.code %>
+  Departure: <%= @booking.flight.start_datetime.in_time_zone("Central Time (US & Canada)").strftime("%c") %>
+  Duration: <%= @booking.flight.duration %> minutes
+
+Fairwell, friend. May your journey be filled with success.
+
+“Still round the corner there may wait a new road or a secret gate, and though I oft have passed them by, a day will come at last when I shall take the hidden paths that run west of the moon, east of the sun”
